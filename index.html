@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Raíz Viva Coach</title>
+<meta name="theme-color" content="#0B2E22">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Raíz Viva">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g9:#0B2E22;--g8:#0E3A2B;--g7:#124A37;--g5:#1F6F54;--g2:#DDE9E2;--cream:#F8F3E6;--cream2:#EFE7D2;--gold:#C9A44C;--gold2:#E2C77A;--ink:#17201B;--mut:#5B665F;--red:#B04A3A;--ok:#2E9E6B;--sb:env(safe-area-inset-bottom,0px);--st:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+button,input,textarea,select{font-family:inherit}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.serif{font-family:'Playfair Display',Georgia,serif}
+#app{max-width:560px;margin:0 auto;min-height:100%;padding-bottom:calc(86px + var(--sb))}
+header.hd{background:radial-gradient(120% 140% at 20% 0%,#17604A,#0B2E22 62%,#071E16);color:var(--cream);padding:calc(18px + var(--st)) 20px 26px;border-radius:0 0 28px 28px;position:relative}
+header.hd .row{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.25rem}.logo i{color:var(--gold2);font-weight:500}
+.gear{background:rgba(255,255,255,.08);border:1px solid rgba(226,199,122,.25);color:var(--gold2);width:38px;height:38px;border-radius:50%;font-size:1.05rem;cursor:pointer}
+header.hd h1{font-family:'Playfair Display',serif;font-size:1.65rem;line-height:1.15;margin:14px 0 4px}
+header.hd p{color:#BFD0C7;font-size:.92rem}
+main{padding:18px 16px 0}
+.card{background:#fff;border:1px solid var(--cream2);border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 6px 20px rgba(20,50,40,.06)}
+.card h3{font-family:'Playfair Display',serif;color:var(--g9);font-size:1.15rem;margin-bottom:4px}
+.eyebrow{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.mut{color:var(--mut);font-size:.9rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#E9CD82,#C9A44C);color:#0B2E22;font-weight:800;border:0;border-radius:999px;padding:14px 24px;font-size:1rem;cursor:pointer;width:100%;box-shadow:0 8px 22px rgba(201,164,76,.3)}
+.btn.sec{background:transparent;border:1.5px solid var(--g5);color:var(--g7);box-shadow:none}
+.btn.dark{background:var(--g7);color:var(--gold2);box-shadow:none}
+.btn.small{width:auto;padding:9px 16px;font-size:.88rem}
+.btn:active{transform:scale(.98)}
+/* hero stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(226,199,122,.2);border-radius:14px;padding:10px 8px;text-align:center}
+.stat b{display:block;font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold2);line-height:1.1}
+.stat span{font-size:.7rem;color:#BFD0C7;letter-spacing:.04em}
+/* ring */
+.ringwrap{display:flex;align-items:center;gap:16px}
+.ring{width:84px;height:84px;flex:0 0 84px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .t{position:absolute;inset:0;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;color:var(--g7);font-size:1.15rem}
+/* habits */
+.habit{display:flex;align-items:center;gap:14px;padding:13px 4px;border-bottom:1px solid #F0EAD7;cursor:pointer}
+.habit:last-child{border-bottom:0}
+.habit .box{width:30px;height:30px;border-radius:10px;border:2px solid var(--gold);flex:0 0 30px;display:grid;place-items:center;color:#fff;font-weight:800;transition:.2s}
+.habit.on .box{background:var(--g5);border-color:var(--g5)}
+.habit .tx b{display:block;color:var(--g9);font-size:.97rem}
+.habit .tx span{color:var(--mut);font-size:.82rem}
+.habit.on .tx b{text-decoration:line-through;text-decoration-color:var(--gold);color:var(--mut)}
+.habit .ic{margin-left:auto;font-size:1.3rem}
+.new{display:inline-block;background:var(--gold);color:var(--g9);font-size:.6rem;font-weight:800;letter-spacing:.1em;padding:2px 7px;border-radius:99px;margin-left:6px;vertical-align:middle}
+/* mood */
+.moods{display:flex;gap:6px;margin-top:10px}
+.moods button{flex:1;border:1.5px solid var(--cream2);background:#fff;border-radius:12px;padding:9px 0;font-size:1.2rem;cursor:pointer}
+.moods button.on{border-color:var(--gold);background:#FFF6DC}
+.seg{display:flex;gap:8px;margin-top:10px}
+.seg button{flex:1;border:1.5px solid var(--cream2);background:#fff;border-radius:12px;padding:10px 4px;font-size:.88rem;font-weight:600;color:var(--g7);cursor:pointer}
+.seg button.on{background:var(--g7);color:var(--gold2);border-color:var(--g7)}
+textarea,input[type=text],input[type=date]{width:100%;border:1.5px solid var(--cream2);border-radius:12px;padding:12px;font:inherit;background:#fff;color:var(--ink)}
+textarea{min-height:72px;resize:vertical;margin-top:10px}
+/* tabs nav */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--cream2);padding:8px 8px calc(8px + var(--sb));display:flex;justify-content:space-around;max-width:560px;margin:0 auto}
+nav.tabs button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--mut);font-size:.68rem;font-weight:600;padding:6px 0;cursor:pointer;border-radius:12px}
+nav.tabs button .i{font-size:1.35rem}
+nav.tabs button.on{color:var(--g7);background:var(--g2)}
+/* timer */
+.stage{text-align:center}
+.head{width:200px;margin:6px auto 0}
+.zone{fill:rgba(201,164,76,.0);stroke:#C9A44C;stroke-width:0;transition:.4s}
+.zone.on{fill:rgba(201,164,76,.55);stroke-width:3}
+.time{font-family:'Playfair Display',serif;font-size:3.4rem;color:var(--g9);font-weight:800;line-height:1;margin:6px 0}
+.steps{display:flex;gap:6px;margin:12px 0}
+.steps i{flex:1;height:6px;border-radius:6px;background:var(--cream2)}
+.steps i.on{background:var(--gold)}.steps i.done{background:var(--g5)}
+.cue{background:var(--g8);color:#EDE8D8;border-radius:16px;padding:14px 16px;text-align:left;margin:10px 0 14px}
+.cue b{color:var(--gold2);font-family:'Playfair Display',serif;font-size:1.1rem}
+/* breath */
+.bwrap{display:grid;place-items:center;height:260px}
+.orb{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E9CD82,#C9A44C 55%,#8d6f25);box-shadow:0 0 60px rgba(201,164,76,.5);transform:scale(.7);transition:transform 4s ease-in-out;display:grid;place-items:center;color:var(--g9);font-weight:800;text-align:center;font-family:'Playfair Display',serif}
+.orb small{font-size:.8rem;display:block;font-family:Inter;font-weight:600}
+/* plan */
+details.wk{background:#fff;border:1px solid var(--cream2);border-radius:18px;margin-bottom:10px;overflow:hidden}
+details.wk summary{list-style:none;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+details.wk summary::-webkit-details-marker{display:none}
+.wn{width:42px;height:42px;border-radius:12px;background:var(--g7);color:var(--gold2);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;flex:0 0 42px}
+.wk.cur .wn{background:var(--gold);color:var(--g9)}
+.wk .body{padding:0 16px 16px;font-size:.93rem}
+.wk .body ul{margin:8px 0 0 18px}
+.pill{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--g2);color:var(--g7);margin-left:auto;white-space:nowrap}
+.pill.gold{background:#FFF1CC;color:#7a5a10}
+.photobar{background:#FFF6DC;border:1px solid #EFE0B0;border-radius:16px;padding:14px;margin-bottom:14px}
+/* charts */
+.chart text{font-family:Inter;font-size:10px;fill:#5B665F}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.badge{text-align:center;padding:12px 6px;border-radius:16px;background:#fff;border:1px solid var(--cream2);opacity:.45;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none;border-color:var(--gold);background:#FFF6DC}
+.badge .e{font-size:1.7rem}.badge b{display:block;font-size:.72rem;color:var(--g9)}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(7,30,22,.7);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.modal.on{display:flex}
+.modal .sheet{background:var(--cream);width:100%;max-width:560px;border-radius:26px 26px 0 0;padding:26px 22px calc(26px + var(--sb));animation:up .3s ease}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.legal{font-size:.74rem;color:var(--mut);line-height:1.5;margin-top:8px}
+.toast{position:fixed;left:50%;bottom:calc(96px + var(--sb));transform:translateX(-50%);background:var(--g9);color:var(--gold2);padding:10px 18px;border-radius:99px;font-size:.88rem;font-weight:600;z-index:60;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+.tip{border-left:4px solid var(--gold);background:#FFFBF0;border-radius:0 14px 14px 0;padding:12px 14px;font-size:.92rem;margin-top:12px}
+.hide{display:none!important}
+#report{display:none}
+@media print{
+ body>*:not(#report){display:none!important}
+ #report{display:block!important;padding:20px;font-size:12px;background:#fff}
+ #report h1{font-family:'Playfair Display',serif;font-size:22px}
+ #report table{width:100%;border-collapse:collapse;margin:10px 0}
+ #report td,#report th{border:1px solid #ccc;padding:5px 7px;text-align:left}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav class="tabs" id="nav" style="display:none"></nav>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+<div id="report"></div>
+
+<script>
+(function(){
+'use strict';
+var K='rvcoach.v1';
+var HABITS=[
+ {id:'cuero',n:'Cuidado del cuero cabelludo',s:'Lavado suave, sin uñas, enjuague abundante',ic:'🧴',w:1},
+ {id:'sueno',n:'Sueño de 7 a 8 horas',s:'Hora fija y pantallas fuera 30 min antes',ic:'🌙',w:1},
+ {id:'masaje',n:'Masaje de 4 minutos',s:'Usa la pestaña Masaje',ic:'💆',w:2},
+ {id:'plato',n:'Plato Raíz Viva en 2 comidas',s:'Proteína + hierro con vitamina C',ic:'🥗',w:3},
+ {id:'resp',n:'Respiración 4-6',s:'Usa la pestaña Respira',ic:'🌬️',w:4},
+ {id:'mov',n:'Movimiento de 20 minutos',s:'Caminar, trotar o fuerza',ic:'🚶',w:4}
+];
+var WEEKS=[
+ {t:'Línea base y orden',m:'Toma tus 5 fotos de línea base, ajusta tu rutina de lavado y fija tu hora de dormir.',g:['Fotos de línea base (frente, izquierda, derecha, coronilla, nuca)','Ajustar tu rutina de lavado','Fijar hora de dormir','Agendar consulta si cumples alguna señal de alerta'],tip:'No busques cambios todavía: busca constancia.'},
+ {t:'Masaje de 4 minutos',m:'Suma el masaje diario ligado a un momento fijo del día.',g:['Masaje al menos 5 días','Pedir exámenes si tu médico los indicó'],tip:'Asócialo a algo que ya haces: ducharte o prepararte para dormir.'},
+ {t:'Plato Raíz Viva',m:'Organiza dos comidas al día con proteína y una fuente de hierro más vitamina C.',g:['Plato Raíz Viva en 2 comidas diarias','Café y té lejos de las comidas ricas en hierro'],tip:'Limón, naranja o kiwi con las lentejas ayudan a absorber el hierro.'},
+ {t:'Respiración y movimiento',m:'Agrega 5 minutos de respiración 4-6 y 20 minutos de movimiento.',g:['Respiración 4-6 cada día','Movimiento 3 a 4 veces por semana','Fotos del mes 1 y comparación con la semana 1'],tip:'Hoy toca foto de seguimiento si no la hiciste.'},
+ {t:'Un producto natural, opcional',m:'Si quieres, prueba el tónico de romero con prueba de parche. Un producto a la vez.',g:['Prueba de parche de 24 horas','Tónico de romero 3 veces por semana (opcional)'],tip:'Introduce una sola novedad y espera 2 semanas antes de otra.'},
+ {t:'Revisión de exámenes',m:'Con tus resultados, ajusta alimentación o acuerda con tu médico los siguientes pasos.',g:['Revisar resultados con tu médico','Ajustar alimentación según los resultados'],tip:'No te suplementes por tu cuenta sin indicación.'},
+ {t:'Rutina de estrés',m:'Elige un hábito de descarga que disfrutes y protege tu hora de dormir.',g:['Elegir tu hábito de descarga','Pantallas fuera 30 minutos antes de dormir'],tip:'Caminar, música, hablar con alguien: lo que sí vas a sostener.'},
+ {t:'Medición del mes 2',m:'Repite tus 5 fotos y evalúa qué hábito te cuesta más para simplificarlo.',g:['Repetir las 5 fotos del mes 2','Simplificar el hábito que más cuesta'],tip:'Compara siempre con la misma luz y distancia.'},
+ {t:'Consolidar tu rutina',m:'Tu rutina ya debería ser casi automática. Quita lo que pese.',g:['Mantener rutina completa','Quitar o cambiar lo que te pesa'],tip:'La mejor rutina es la que sostienes.'},
+ {t:'Consulta de seguimiento',m:'Si estás en tratamiento médico, agenda la revisión de tolerancia y primeras señales.',g:['Agendar o hacer la consulta de seguimiento','Llevar tus fotos y registros'],tip:'Tu historial ayuda a decidir con tu médico.'},
+ {t:'Revisión de hábitos de vida',m:'Revisa sueño, alcohol, tabaco y estrés. Ajusta una cosa, no todo.',g:['Revisar sueño, alcohol y tabaco','Ajustar un solo hábito'],tip:'Un cambio pequeño y sostenido gana.'},
+ {t:'Fotos del mes 3 y balance',m:'Compara las 5 fotos de la semana 1 con las de la semana 12 y decide qué mantienes.',g:['Fotos del mes 3','Comparar con la semana 1','Decidir qué mantener, ajustar o quitar'],tip:'Un buen resultado también es frenar el avance y sentir control.'}
+];
+var PHOTOWK=[1,4,8,12];
+var STEPS=[
+ {n:'Sienes y frente',d:'Yemas de los dedos, círculos pequeños con presión media. Mueve la piel, no resbales sobre ella.',z:'z1'},
+ {n:'Laterales y encima de las orejas',d:'Presiona y suelta, o desliza hacia arriba lentamente.',z:'z2'},
+ {n:'Coronilla',d:'Círculos amplios con las dos manos hacia la parte alta de la cabeza.',z:'z3'},
+ {n:'Nuca y cuello',d:'De la base del cráneo hacia arriba. Termina soltando los hombros.',z:'z4'}
+];
+var FAST=/[?&]fast=1/.test(location.search);
+var STEPSEC=FAST?3:60;
+var MSGS=['Hoy no se trata de hacerlo perfecto, sino de hacerlo.','Un hábito pequeño hoy vale más que un plan enorme mañana.','Tu cabello responde a la constancia, no a la prisa.','Cuidarte también es una forma de quererte.','Cada casilla marcada es un voto por ti.','Lo que repites se vuelve tuyo. Sigue.','Estás construyendo algo que se nota con el tiempo.'];
+function nm(){return S.name?S.name.split(' ')[0]:''}
+function hello(){var h=new Date().getHours();var g=h<12?'Buenos días':(h<19?'Buenas tardes':'Buenas noches');return g+(nm()?', '+nm():'')}
+function dailyMsg(){var d=dayNum();var m=MSGS[(d-1)%MSGS.length];return m}
+function def(){return {v:1,name:'',start:'',days:{},ok:false}}
+var S;
+function load(){try{var r=localStorage.getItem(K);S=r?JSON.parse(r):def()}catch(e){S=def()}if(!S||!S.days)S=def()}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function iso(d){var y=d.getFullYear(),m=('0'+(d.getMonth()+1)).slice(-2),dd=('0'+d.getDate()).slice(-2);return y+'-'+m+'-'+dd}
+function today(){return iso(new Date())}
+function parse(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+function dayNum(){if(!S.start)return 1;return Math.floor((parse(today())-parse(S.start))/86400000)+1}
+function weekNum(d){var n=Math.floor((d-1)/7)+1;return n<1?1:(n>12?12:n)}
+function activeHabits(w){return HABITS.filter(function(h){return h.w<=w})}
+function dayRec(k){if(!S.days[k])S.days[k]={h:[],mood:0,shed:'',note:''};return S.days[k]}
+function dayDone(k){var r=S.days[k];if(!r)return 0;return r.h.length}
+function dayPct(k){var d=Math.floor((parse(k)-parse(S.start))/86400000)+1;if(d<1)return 0;var w=weekNum(d);var a=activeHabits(w).length;var r=S.days[k];if(!r)return 0;var c=r.h.filter(function(id){return activeHabits(w).some(function(x){return x.id===id})}).length;return Math.round(c/a*100)}
+function streak(){var n=0,d=parse(today());var k=iso(d);if(dayPct(k)<70){d.setDate(d.getDate()-1)}
+ while(true){var kk=iso(d);if(parse(kk)<parse(S.start))break;if(dayPct(kk)>=70){n++;d.setDate(d.getDate()-1)}else break}return n}
+function weekPct(w){var tot=0,got=0;for(var i=0;i<7;i++){var d=parse(S.start);d.setDate(d.getDate()+(w-1)*7+i);if(d>parse(today()))break;var k=iso(d);tot++;got+=dayPct(k)}return tot?Math.round(got/tot):null}
+function $(s){return document.querySelector(s)}
+function toast(t){var e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1800)}
+var view='hoy';
+var NAV=[['hoy','🏠','Hoy'],['masaje','💆','Masaje'],['resp','🌬️','Respira'],['plan','🗓️','Plan'],['prog','📈','Progreso']];
+function nav(){var n=$('#nav');n.style.display='flex';n.innerHTML=NAV.map(function(x){return '<button data-v="'+x[0]+'" class="'+(view===x[0]?'on':'')+'"><span class="i">'+x[1]+'</span>'+x[2]+'</button>'}).join('')}
+document.addEventListener('click',function(e){var b=e.target.closest('#nav button');if(b){go(b.getAttribute('data-v'))}});
+function go(v){if(v!=='masaje')stopTimer(true);if(v!=='resp')stopBreath(true);view=v;render();window.scrollTo(0,0)}
+function header(title,sub){return '<header class="hd"><div class="row"><div class="logo">RAÍZ <i>Viva</i> Coach</div><button class="gear" id="gear" aria-label="Ajustes">⚙</button></div><h1>'+title+'</h1><p>'+sub+'</p>'+(arguments[2]||'')+'</header>'}
+function render(){
+ var a=$('#app');
+ if(!S.start||!S.ok){a.innerHTML=welcome();$('#nav').style.display='none';bindWelcome();return}
+ nav();
+ if(view==='hoy')a.innerHTML=vHoy();
+ else if(view==='masaje')a.innerHTML=vMasaje();
+ else if(view==='resp')a.innerHTML=vResp();
+ else if(view==='plan')a.innerHTML=vPlan();
+ else if(view==='prog')a.innerHTML=vProg();
+ else if(view==='aj')a.innerHTML=vAj();
+ bind();
+}
+/* WELCOME */
+function welcome(){return '<header class="hd" style="padding-bottom:34px"><div class="logo">RAÍZ <i>Viva</i> Coach</div><h1 style="font-size:2rem;margin-top:22px">Bienvenido a tu plan de 12 semanas</h1><p>Un compañero diario para tus hábitos, tu masaje y tu respiración. Hecho a tu medida.</p></header><main><div class="card"><h3>Hagámoslo personal</h3><p class="mut" style="margin-bottom:12px">Tus datos se guardan solo en este dispositivo. No hay cuentas ni servidores.</p><label class="mut">¿Cómo te gustaría que te llame?</label><input type="text" id="wn" placeholder="Tu nombre" value="'+(S.name||'')+'" style="margin:6px 0 14px"><label class="mut">¿Cuándo empieza tu semana 1?</label><input type="date" id="ws" value="'+(S.start||today())+'" style="margin:6px 0 14px"><label style="display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--mut);margin-bottom:14px"><input type="checkbox" id="wc" style="margin-top:4px;width:18px;height:18px"><span>Entiendo que esta app es informativa y educativa, no es consejo médico y no garantiza resultados. Consultaré a un profesional de la salud ante dudas.</span></label><button class="btn" id="wgo">Comenzar mi plan</button></div></main>'}
+function bindWelcome(){$('#wgo').onclick=function(){if(!$('#wc').checked){toast('Marca la casilla para continuar');return}var s=$('#ws').value||today();S.name=$('#wn').value.trim();S.start=s;S.ok=true;save();view='hoy';render()}}
+/* HOY */
+function vHoy(){
+ var d=dayNum(),w=weekNum(d),k=today(),r=dayRec(k),hs=activeHabits(w);
+ var done=r.h.filter(function(id){return hs.some(function(x){return x.id===id})}).length;var pct=Math.round(done/hs.length*100);
+ var greet=hello()+' 👋';
+ var finished=d>84;
+ var sub=finished?'Completaste tus 12 semanas'+(nm()?', '+nm():'')+'. ¡Enhorabuena!':'Día '+d+' de 84 · Semana '+w+': '+WEEKS[w-1].t;
+ var h='<header class="hd"><div class="row"><div class="logo">RAÍZ <i>Viva</i> Coach</div><button class="gear" id="gear" aria-label="Ajustes">'+(nm()?nm().charAt(0).toUpperCase():'⚙')+'</button></div><h1>'+greet+'</h1><p>'+sub+'</p><p style="margin-top:8px;font-family:\'Playfair Display\',serif;font-style:italic;color:#E2C77A;font-size:1rem">“'+dailyMsg()+'”</p><div class="stats"><div class="stat"><b>'+streak()+'</b><span>racha (días)</span></div><div class="stat"><b>'+pct+'%</b><span>hoy</span></div><div class="stat"><b>'+(weekPct(w)===null?'–':weekPct(w)+'%')+'</b><span>esta semana</span></div></div></header><main>';
+ if(PHOTOWK.indexOf(w)>-1&&(d-1)%7<=2)h+='<div class="photobar"><b>📸 Esta semana toca foto de seguimiento</b><p class="mut" style="margin-top:4px">Luz natural, cabello seco, misma distancia: frente, izquierda, derecha, coronilla y nuca.</p></div>';
+ h+='<div class="card"><div class="eyebrow">Misión de la semana '+w+'</div><h3>'+WEEKS[w-1].t+'</h3><p class="mut">'+WEEKS[w-1].m+'</p><div class="tip">💡 '+WEEKS[w-1].tip+'</div></div>';
+ h+='<div class="card"><div class="ringwrap"><div class="ring"><svg width="84" height="84"><circle cx="42" cy="42" r="36" stroke="#EFE7D2" stroke-width="9" fill="none"/><circle cx="42" cy="42" r="36" stroke="#C9A44C" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="'+(2*Math.PI*36)+'" stroke-dashoffset="'+(2*Math.PI*36*(1-pct/100))+'"/></svg><div class="t">'+done+'/'+hs.length+'</div></div><div><h3>Tus hábitos de hoy</h3><p class="mut">'+(pct>=70?'¡Superaste el 70%! Cuenta para tu racha.':'Con el 70% mantienes tu racha.')+'</p></div></div><div style="margin-top:6px">';
+ hs.forEach(function(x){var on=r.h.indexOf(x.id)>-1;h+='<div class="habit '+(on?'on':'')+'" data-h="'+x.id+'"><div class="box">'+(on?'✓':'')+'</div><div class="tx"><b>'+x.n+(x.w===w&&w>1?'<span class="new">NUEVO</span>':'')+'</b><span>'+x.s+'</span></div><div class="ic">'+x.ic+'</div></div>'});
+ h+='</div></div>';
+ h+='<div class="card"><h3>¿Cómo te sientes hoy?</h3><div class="moods">'+['😞','😕','😐','🙂','😄'].map(function(e,i){return '<button data-m="'+(i+1)+'" class="'+(r.mood===i+1?'on':'')+'">'+e+'</button>'}).join('')+'</div><h3 style="margin-top:16px">Pelos en ducha y cepillo</h3><div class="seg">'+[['pocos','Pocos'],['normal','Normal'],['muchos','Muchos']].map(function(x){return '<button data-s="'+x[0]+'" class="'+(r.shed===x[0]?'on':'')+'">'+x[1]+'</button>'}).join('')+'</div><textarea id="note" placeholder="Nota del día (opcional)">'+(r.note||'')+'</textarea></div>';
+ h+='<p class="legal" style="padding:0 6px 10px">Material informativo y educativo. No sustituye la consulta médica. Los resultados varían y no están garantizados.</p></main>';
+ return h}
+/* MASAJE */
+var T={run:false,idx:0,rem:STEPSEC,iv:null,total:STEPSEC*4,wl:null};
+function fmt(s){return ('0'+Math.floor(s/60)).slice(-2)+':'+('0'+(s%60)).slice(-2)}
+function vMasaje(){
+ var cur=STEPS[T.idx];var elapsed=T.idx*STEPSEC+(STEPSEC-T.rem);
+ var h=header('Masaje de 4 minutos','Sigue las 4 zonas, un minuto cada una.')+'<main><div class="card stage">';
+ h+='<svg class="head" viewBox="0 0 200 230"><ellipse cx="100" cy="118" rx="70" ry="88" fill="#E9CDA9"/><path d="M34 100 C34 20 166 20 166 100 C150 62 50 62 34 100Z" fill="#124A37"/><path id="z1" class="zone '+(cur.z==='z1'?'on':'')+'" d="M58 66 C80 52 120 52 142 66 L142 84 C120 74 80 74 58 84Z"/><path id="z2" class="zone '+(cur.z==='z2'?'on':'')+'" d="M32 104 C28 126 30 144 38 160 L58 150 C52 134 52 120 54 104Z M168 104 C172 126 170 144 162 160 L142 150 C148 134 148 120 146 104Z"/><ellipse id="z3" class="zone '+(cur.z==='z3'?'on':'')+'" cx="100" cy="46" rx="40" ry="18"/><path id="z4" class="zone '+(cur.z==='z4'?'on':'')+'" d="M66 200 C84 222 116 222 134 200 L134 214 C116 232 84 232 66 214Z"/><circle cx="78" cy="124" r="4" fill="#124A37"/><circle cx="122" cy="124" r="4" fill="#124A37"/><path d="M84 154 Q100 164 116 154" stroke="#124A37" stroke-width="3" fill="none"/></svg>';
+ h+='<div class="steps">'+STEPS.map(function(s,i){return '<i class="'+(i<T.idx?'done':(i===T.idx?'on':''))+'"></i>'}).join('')+'</div><div class="time" id="tm">'+fmt(T.rem)+'</div><p class="mut">Paso '+(T.idx+1)+' de 4 · total '+fmt(Math.max(0,T.total-elapsed))+' restantes</p><div class="cue"><b>'+cur.n+'</b><p style="margin-top:4px;font-size:.92rem">'+cur.d+'</p></div>';
+ h+=T.run?'<button class="btn dark" id="tpause">⏸ Pausar</button>':'<button class="btn" id="tstart">▶ '+(elapsed>0?'Continuar':'Empezar masaje')+'</button>';
+ h+='<button class="btn sec" id="treset" style="margin-top:10px">Reiniciar</button></div>';
+ h+='<div class="card"><h3>Antes de empezar</h3><p class="mut">Cabello seco o ligeramente húmedo. Presión firme pero sin dolor. No lo hagas si tienes heridas, infecciones o inflamación intensa en el cuero cabelludo. Un estudio pequeño sugiere un posible aumento del grosor del pelo con 4 minutos diarios durante 24 semanas; es evidencia preliminar y no es un tratamiento probado de la calvicie.</p></div></main>';
+ return h}
+function beep(f,d){try{var A=window.AudioContext||window.webkitAudioContext;if(!A)return;var c=new A(),o=c.createOscillator(),g=c.createGain();o.frequency.value=f||660;o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(.001,c.currentTime);g.gain.exponentialRampToValueAtTime(.25,c.currentTime+.03);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+(d||.35));o.start();o.stop(c.currentTime+(d||.35)+.05)}catch(e){}}
+function vib(p){try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
+function wake(on){try{if(on&&navigator.wakeLock){navigator.wakeLock.request('screen').then(function(l){T.wl=l}).catch(function(){})}else if(T.wl){T.wl.release();T.wl=null}}catch(e){}}
+function startTimer(){if(T.run)return;T.run=true;wake(true);beep(520,.25);T.iv=setInterval(function(){T.rem--;if(T.rem<=0){if(T.idx>=3){finishMassage();return}T.idx++;T.rem=STEPSEC;beep(740,.35);vib([120,60,120]);if(view==='masaje')render();return}if(view==='masaje'){var e=$('#tm');if(e)e.textContent=fmt(T.rem)}},1000);render()}
+function pauseTimer(){T.run=false;clearInterval(T.iv);wake(false);render()}
+function stopTimer(silent){T.run=false;clearInterval(T.iv);wake(false);T.idx=0;T.rem=STEPSEC;if(!silent)render()}
+function finishMassage(){T.run=false;clearInterval(T.iv);wake(false);beep(880,.6);vib([200,100,200,100,300]);T.idx=0;T.rem=STEPSEC;var r=dayRec(today());if(r.h.indexOf('masaje')<0){r.h.push('masaje');save()}render();sheet('<div class="center" style="text-align:center"><div style="font-size:2.6rem">🌿</div><h3 class="serif" style="font-size:1.5rem;color:var(--g9);margin:6px 0">¡Muy bien'+(nm()?', '+nm():'')+'! Masaje completado</h3><p class="mut" style="margin-bottom:16px">Lo marqué por ti en tus hábitos de hoy. Constancia imperfecta sigue contando.</p><button class="btn" id="sclose">Genial</button></div>')}
+/* RESPIRA */
+var B={run:false,cyc:0,ph:0,iv:null,left:0};
+function vResp(){
+ var h=header('Respiración 4-6','Inhala 4 segundos, exhala 6. Diez ciclos.')+'<main><div class="card stage"><div class="bwrap"><div class="orb" id="orb"><div><span id="btx">'+(B.run?'':'Listo')+'</span><small id="bcd">'+(B.run?'':'4 · 6')+'</small></div></div></div><p class="mut" id="bcy">Ciclo '+Math.min(B.cyc+1,10)+' de 10</p><div style="margin-top:14px">'+(B.run?'<button class="btn dark" id="bstop">⏹ Detener</button>':'<button class="btn" id="bstart">▶ Empezar respiración</button>')+'</div></div><div class="card"><h3>Cómo hacerlo</h3><ul class="mut" style="margin:6px 0 0 18px"><li>Siéntate con la espalda recta y los hombros sueltos.</li><li>Inhala por la nariz contando 4.</li><li>Exhala lento por la boca contando 6.</li><li>Hazlo al despertar, a media tarde y antes de dormir.</li></ul></div></main>';
+ return h}
+function stopBreath(silent){B.run=false;clearInterval(B.iv);B.cyc=0;B.ph=0;if(!silent&&view==='resp')render()}
+function startBreath(){B.run=true;B.cyc=0;B.ph=0;render();var orb=$('#orb');setTimeout(function(){phase()},50)}
+function phase(){var orb=$('#orb');if(!orb||!B.run)return;var inh=B.ph===0;var dur=FAST?(inh?1:1):(inh?4:6);orb.style.transition='transform '+dur+'s ease-in-out';orb.style.transform=inh?'scale(1.45)':'scale(.7)';$('#btx').textContent=inh?'Inhala':'Exhala';B.left=dur;$('#bcd').textContent=B.left;$('#bcy').textContent='Ciclo '+(B.cyc+1)+' de 10';beep(inh?560:420,.18);vib(40);clearInterval(B.iv);B.iv=setInterval(function(){B.left--;var e=$('#bcd');if(!e){clearInterval(B.iv);return}if(B.left>0){e.textContent=B.left;return}clearInterval(B.iv);if(B.ph===0){B.ph=1;phase()}else{B.ph=0;B.cyc++;if(B.cyc>=10){finishBreath()}else phase()}},1000)}
+function finishBreath(){B.run=false;B.cyc=0;clearInterval(B.iv);beep(880,.6);vib([200,100,200]);var r=dayRec(today());if(r.h.indexOf('resp')<0){r.h.push('resp');save()}render();sheet('<div style="text-align:center"><div style="font-size:2.6rem">🌬️</div><h3 class="serif" style="font-size:1.5rem;color:var(--g9);margin:6px 0">¡Qué bien'+(nm()?', '+nm():'')+'! Respiración completada</h3><p class="mut" style="margin-bottom:16px">Tu sistema nervioso lo agradece. Lo marqué en tus hábitos de hoy.</p><button class="btn" id="sclose">Genial</button></div>')}
+/* PLAN */
+function vPlan(){var d=dayNum(),cw=weekNum(d);var h=header('Tu plan de 12 semanas','Una acción nueva por semana. Mantén las anteriores.')+'<main>';
+ for(var w=1;w<=12;w++){var p=weekPct(w);var st=w<cw?(p!==null?p+'%':''):(w===cw?'Esta semana':'');var open=w===cw?' open':'';
+  h+='<details class="wk '+(w===cw?'cur':'')+'"'+open+'><summary><div class="wn">'+w+'</div><div><b style="color:var(--g9)">'+WEEKS[w-1].t+'</b><div class="mut" style="font-size:.8rem">'+(PHOTOWK.indexOf(w)>-1?'📸 Foto de seguimiento':'Semana '+w)+'</div></div>'+(st?'<span class="pill '+(w===cw?'gold':'')+'">'+st+'</span>':'')+'</summary><div class="body"><p>'+WEEKS[w-1].m+'</p><ul>'+WEEKS[w-1].g.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><div class="tip">💡 '+WEEKS[w-1].tip+'</div></div></details>'}
+ h+='<p class="legal" style="padding:6px">Plan basado en el ebook Raíz Viva. Es orientativo: adapta tu ritmo y consulta a un profesional de la salud.</p></main>';return h}
+/* PROGRESO */
+function chartBars(){var W=320,H=150,pad=24,bw=(W-pad*2)/12;var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" width="100%"><line x1="'+pad+'" y1="'+(H-26)+'" x2="'+(W-pad+8)+'" y2="'+(H-26)+'" stroke="#EFE7D2"/>';
+ for(var i=1;i<=12;i++){var p=weekPct(i);var hh=p===null?0:(H-50)*p/100;var x=pad+(i-1)*bw+4;s+='<rect x="'+x+'" y="'+(H-26-hh)+'" width="'+(bw-8)+'" height="'+hh+'" rx="4" fill="'+(p!==null&&p>=70?'#1F6F54':'#C9A44C')+'" opacity="'+(p===null?.15:1)+'"/><text x="'+(x+(bw-8)/2)+'" y="'+(H-10)+'" text-anchor="middle">S'+i+'</text>';if(p!==null)s+='<text x="'+(x+(bw-8)/2)+'" y="'+(H-30-hh)+'" text-anchor="middle" style="font-weight:700">'+p+'</text>'}
+ s+='<line x1="'+pad+'" x2="'+(W-pad+8)+'" y1="'+(H-26-(H-50)*.7)+'" y2="'+(H-26-(H-50)*.7)+'" stroke="#C9A44C" stroke-dasharray="4 4"/></svg>';return s}
+function chartMood(){var pts=[],base=parse(S.start);for(var i=0;i<84;i++){var d=new Date(base);d.setDate(d.getDate()+i);if(d>parse(today()))break;var r=S.days[iso(d)];pts.push(r&&r.mood?r.mood:null)}
+ var W=320,H=110,n=84;var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" width="100%"><line x1="10" y1="'+(H-18)+'" x2="'+(W-6)+'" y2="'+(H-18)+'" stroke="#EFE7D2"/>';var path='',pen=false;pts.forEach(function(v,i){if(v===null){pen=false;return}var x=10+i*(W-16)/(n-1),y=(H-22)-(v-1)*(H-34)/4;path+=(pen?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';pen=true;s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="2.6" fill="#C9A44C"/>'});
+ s+='<path d="'+path+'" stroke="#1F6F54" stroke-width="2" fill="none"/><text x="10" y="'+(H-4)+'">Día 1</text><text x="'+(W-6)+'" y="'+(H-4)+'" text-anchor="end">Día 84</text></svg>';return s}
+function vProg(){var d=dayNum();var days=Object.keys(S.days).filter(function(k){return S.days[k].h.length>0}).length;var tot=0;Object.keys(S.days).forEach(function(k){tot+=S.days[k].h.length});var st=streak();
+ var bd=[['🌱','Primer día',days>=1],['🔥','Racha 3',maxStreak()>=3],['⭐','Racha 7',maxStreak()>=7],['💆','10 masajes',count('masaje')>=10],['🌬️','10 respiraciones',count('resp')>=10],['🏆','12 semanas',d>84&&days>=40]];
+ var h=header('Tu progreso','Lo que no se mide se olvida.')+'<main><div class="card"><h3>Constancia semanal</h3><p class="mut" style="margin-bottom:8px">Porcentaje de hábitos cumplidos por semana. La línea punteada marca el 70%.</p>'+chartBars()+'</div><div class="card"><h3>Estado de ánimo</h3>'+chartMood()+'</div><div class="card"><h3>Tus números</h3><div class="stats" style="margin-top:10px"><div class="stat" style="background:#F4F9F6;border-color:#CFE3D8"><b style="color:var(--g7)">'+days+'</b><span style="color:var(--mut)">días activos</span></div><div class="stat" style="background:#F4F9F6;border-color:#CFE3D8"><b style="color:var(--g7)">'+tot+'</b><span style="color:var(--mut)">hábitos hechos</span></div><div class="stat" style="background:#F4F9F6;border-color:#CFE3D8"><b style="color:var(--g7)">'+st+'</b><span style="color:var(--mut)">racha actual</span></div></div></div><div class="card"><h3>Logros</h3><div class="badges" style="margin-top:10px">'+bd.map(function(b){return '<div class="badge '+(b[2]?'on':'')+'"><div class="e">'+b[0]+'</div><b>'+b[1]+'</b></div>'}).join('')+'</div></div><div class="card"><h3>Informe para tu médico</h3><p class="mut" style="margin-bottom:12px">Genera una hoja imprimible con tu constancia, ánimo y notas para llevar a tu consulta.</p><button class="btn dark" id="rep">Generar informe</button></div></main>';return h}
+function count(id){var n=0;Object.keys(S.days).forEach(function(k){if(S.days[k].h.indexOf(id)>-1)n++});return n}
+function maxStreak(){var m=0,c=0,base=parse(S.start);for(var i=0;i<84;i++){var d=new Date(base);d.setDate(d.getDate()+i);if(d>parse(today()))break;if(dayPct(iso(d))>=70){c++;if(c>m)m=c}else c=0}return m}
+function report(){var h='<h1>Informe Raíz Viva Coach</h1><p>'+(S.name?S.name+' · ':'')+'Inicio del plan: '+S.start+' · Generado: '+today()+'</p><h2>Constancia semanal</h2><table><tr><th>Semana</th><th>Foco</th><th>Constancia</th></tr>';
+ for(var w=1;w<=12;w++){var p=weekPct(w);h+='<tr><td>'+w+'</td><td>'+WEEKS[w-1].t+'</td><td>'+(p===null?'–':p+'%')+'</td></tr>'}
+ h+='</table><h2>Registro diario con notas</h2><table><tr><th>Fecha</th><th>Hábitos</th><th>Ánimo</th><th>Pelos</th><th>Nota</th></tr>';
+ Object.keys(S.days).sort().forEach(function(k){var r=S.days[k];if(!r.h.length&&!r.note&&!r.mood&&!r.shed)return;h+='<tr><td>'+k+'</td><td>'+r.h.length+'</td><td>'+(r.mood||'–')+'</td><td>'+(r.shed||'–')+'</td><td>'+(r.note||'').replace(/</g,'&lt;')+'</td></tr>'});
+ h+='</table><p style="font-size:10px;color:#666">Registro personal informativo. No constituye diagnóstico ni consejo médico.</p>';$('#report').innerHTML=h;window.print()}
+/* AJUSTES */
+function vAj(){return header('Ajustes','Tu información vive en este dispositivo.')+'<main><div class="card"><h3>Tu plan</h3><label class="mut">Nombre</label><input type="text" id="an" value="'+(S.name||'')+'" style="margin:6px 0 12px"><label class="mut">Fecha de inicio (semana 1)</label><input type="date" id="as" value="'+S.start+'" style="margin:6px 0 14px"><button class="btn small" id="asave">Guardar cambios</button></div><div class="card"><h3>Respaldo de tus datos</h3><p class="mut" style="margin-bottom:12px">Si cambias de teléfono o borras los datos del navegador, perderás tu registro. Exporta un respaldo de vez en cuando.</p><button class="btn dark" id="aexp" style="margin-bottom:10px">⬇ Exportar respaldo</button><label class="btn sec" style="cursor:pointer">⬆ Importar respaldo<input type="file" id="aimp" accept="application/json" style="display:none"></label></div><div class="card"><h3>Instálala como app</h3><p class="mut"><b>iPhone (Safari):</b> botón Compartir → “Añadir a pantalla de inicio”.<br><b>Android (Chrome):</b> menú ⋮ → “Instalar app” o “Añadir a pantalla de inicio”.</p></div><div class="card"><h3>Zona de cuidado</h3><button class="btn sec" id="areset" style="border-color:var(--red);color:var(--red)">Borrar todos mis datos</button></div><div class="card"><h3>Aviso legal</h3><p class="legal" style="margin-top:0">Raíz Viva Coach es un material informativo y educativo, complemento del ebook Raíz Viva. No constituye diagnóstico, tratamiento ni consejo médico, y no sustituye la consulta con profesionales de la salud. No se garantizan resultados. Consulta con un médico antes de iniciar cualquier tratamiento, suplemento o producto, especialmente si estás en embarazo, lactancia, tienes alergias o enfermedades de base.<br><br>© Gabi Martínez · Versión 1.0</p></div></main>'}
+/* MODAL */
+function sheet(html){$('#sheet').innerHTML=html;$('#modal').classList.add('on')}
+function closeSheet(){$('#modal').classList.remove('on')}
+/* BIND */
+function bind(){
+ var g=$('#gear');if(g)g.onclick=function(){view='aj';render();window.scrollTo(0,0)};
+ document.querySelectorAll('.habit').forEach(function(el){el.onclick=function(){var id=el.getAttribute('data-h'),r=dayRec(today()),i=r.h.indexOf(id);if(i>-1)r.h.splice(i,1);else{r.h.push(id);vib(25)}save();render()}});
+ document.querySelectorAll('[data-m]').forEach(function(el){el.onclick=function(){var r=dayRec(today());var v=+el.getAttribute('data-m');r.mood=(r.mood===v?0:v);save();render()}});
+ document.querySelectorAll('[data-s]').forEach(function(el){el.onclick=function(){var r=dayRec(today());var v=el.getAttribute('data-s');r.shed=(r.shed===v?'':v);save();render()}});
+ var n=$('#note');if(n)n.oninput=function(){dayRec(today()).note=n.value;save()};
+ var a;
+ if(a=$('#tstart'))a.onclick=startTimer;if(a=$('#tpause'))a.onclick=pauseTimer;if(a=$('#treset'))a.onclick=function(){stopTimer(false)};
+ if(a=$('#bstart'))a.onclick=startBreath;if(a=$('#bstop'))a.onclick=function(){stopBreath(false)};
+ if(a=$('#rep'))a.onclick=report;
+ if(a=$('#asave'))a.onclick=function(){S.name=$('#an').value.trim();S.start=$('#as').value||S.start;save();toast('Guardado');view='hoy';render()};
+ if(a=$('#aexp'))a.onclick=function(){try{var b=new Blob([JSON.stringify(S)],{type:'application/json'});var u=URL.createObjectURL(b);var l=document.createElement('a');l.href=u;l.download='raiz-viva-coach-respaldo-'+today()+'.json';document.body.appendChild(l);l.click();l.remove();setTimeout(function(){URL.revokeObjectURL(u)},1000);toast('Respaldo exportado')}catch(e){toast('No se pudo exportar')}};
+ if(a=$('#aimp'))a.onchange=function(ev){var f=ev.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var o=JSON.parse(rd.result);if(!o||!o.days||!o.start)throw 0;S=o;S.ok=true;save();toast('Respaldo importado');view='hoy';render()}catch(e){toast('Archivo no válido')}};rd.readAsText(f)};
+ if(a=$('#areset'))a.onclick=function(){sheet('<h3 class="serif" style="font-size:1.4rem;color:var(--g9)">¿Borrar todo?</h3><p class="mut" style="margin:8px 0 16px">Se eliminará tu plan y tu registro de este dispositivo. No se puede deshacer.</p><button class="btn" id="sdel" style="background:var(--red);color:#fff;margin-bottom:10px">Sí, borrar</button><button class="btn sec" id="sclose">Cancelar</button>')};
+}
+document.addEventListener('click',function(e){if(e.target.id==='sclose'){closeSheet()}if(e.target.id==='sdel'){try{localStorage.removeItem(K)}catch(x){}S=def();closeSheet();view='hoy';render()}if(e.target.id==='modal')closeSheet()});
+load();render();
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+})();
+</script>
+</body>
+</html>
